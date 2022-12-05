@@ -37,7 +37,12 @@ public class Player : MonoBehaviour
 
   public int[] RoundsPerSecond = new int[3];
   bool[] mFiring = new bool[3];
+    public AudioSource mAudioSourceFiring;
+    public AudioClip mFiringSound;
+    public AudioClip mReloadSound;
+    public AudioClip mNoAmmoSound;
 
+    Dictionary<AudioClip, bool> mSoundStatus = new Dictionary<AudioClip, bool>();
 
   // Start is called before the first frame update
   void Start()
@@ -48,6 +53,9 @@ public class Player : MonoBehaviour
     mFsm.SetCurrentState((int)PlayerStateType.MOVEMENT);
 
     PlayerConstants.PlayerMask = mPlayerMask;
+        mSoundStatus.Add(mFiringSound, false);
+        mSoundStatus.Add(mReloadSound, false);
+        mSoundStatus.Add(mNoAmmoSound, false);
   }
 
   void Update()
